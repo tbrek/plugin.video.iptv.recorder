@@ -678,6 +678,7 @@ def record_once_thread(programmeid, do_refresh=True, watch=False, remind=False, 
     else:
         folder = fchannelname
         if ftitle:
+            log("Nazwa{}".format(ftitle))
             filename = "%s - %s - %s" % (ftitle, fchannelname, local_starttime.strftime("%Y-%m-%d %H-%M"))
         else:
             filename = "%s - %s" % (fchannelname, local_starttime.strftime("%Y-%m-%d %H-%M"))
@@ -1002,8 +1003,8 @@ def renew_jobs():
 def sane_name(name):
     if not name:
         return
-    if windows() or (plugin.get_setting('filename.urlencode', str) == 'true'):
-        log("Name: {}".format(name))
+    # if windows() or (plugin.get_setting('filename.urlencode', str) == 'true'):
+        log("Encoding name: {}".format(name))
         name = quote(name.encode('utf-8'))
         name = name.replace("%20",' ')
         name = name.replace(",", " -")
@@ -1011,28 +1012,29 @@ def sane_name(name):
         name = name.replace('%2C', " -")
         name = name.replace(':', " -")
         name = name.replace("%3A", " -")
-        name = name.replace("%C4%84", "Ą")
-        name = name.replace("%C4%85", "ą")
-        name = name.replace("%C4%86", "Ć")
-        name = name.replace("%C4%87", "ć")
-        name = name.replace("%C4%98", "Ę")
-        name = name.replace("%C4%99", "ę")
-        name = name.replace("%C5%81", "Ł")
-        name = name.replace("%C5%82", "ł")
-        name = name.replace("%C5%83", "Ń")
-        name = name.replace("%C5%84", "ń")
-        name = name.replace("%C5%93", "Ó")
-        name = name.replace("%C3%B3", "ó")
-        name = name.replace("%C5%9A", "Ś")
-        name = name.replace("%C5%9B", "ś")
-        name = name.replace("%C5%B9", "Ź")
-        name = name.replace("%C5%BA", "ź")
-        name = name.replace("%C5%BB", "Ż")
-        name = name.replace("%C5%BC", "ż")
-    else:
-        _quote = {'"': '%22', '|': '%7C', '*': '%2A', '/': '%2F', '<': '%3C', ':': '%3A', '\\': '%5C', '?': '%3F', '>': '%3E'}
-        for char in _quote:
-            name = name.replace(char, _quote[char])
+        name = name.replace("%C4%84", "A")
+        name = name.replace("%C4%85", "a")
+        name = name.replace("%C4%86", "C")
+        name = name.replace("%C4%87", "c")
+        name = name.replace("%C4%98", "E")
+        name = name.replace("%C4%99", "e")
+        name = name.replace("%C5%81", "L")
+        name = name.replace("%C5%82", "l")
+        name = name.replace("%C5%83", "N")
+        name = name.replace("%C5%84", "n")
+        name = name.replace("%C5%93", "O")
+        name = name.replace("%C3%B3", "o")
+        name = name.replace("%C5%9A", "S")
+        name = name.replace("%C5%9B", "s")
+        name = name.replace("%C5%B9", "Z")
+        name = name.replace("%C5%BA", "z")
+        name = name.replace("%C5%BB", "Z")
+        name = name.replace("%C5%BC", "z")
+    # else:
+        # _quote = {'"': '%22', '|': '%7C', '*': '%2A', '/': '%2F', '<': '%3C', ':': '%3A', '\\': '%5C', '?': '%3F', '>': '%3E'}
+        # for char in _quote:
+            # name = name.replace(char, _quote[char])
+        log("Po zakodowaniu: {}".format(name))
     return name
 
 
