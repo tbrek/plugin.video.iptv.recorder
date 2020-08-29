@@ -678,7 +678,6 @@ def record_once_thread(programmeid, do_refresh=True, watch=False, remind=False, 
     else:
         folder = fchannelname
         if ftitle:
-            log("Nazwa{}".format(ftitle))
             filename = "%s - %s - %s" % (ftitle, fchannelname, local_starttime.strftime("%Y-%m-%d %H-%M"))
         else:
             filename = "%s - %s" % (fchannelname, local_starttime.strftime("%Y-%m-%d %H-%M"))
@@ -779,7 +778,6 @@ def record_once_thread(programmeid, do_refresh=True, watch=False, remind=False, 
     post_command = plugin.get_setting('post.command', str)
     post_cmd = post_command.split(' ')
     post_cmd = [s.replace("$p",ffmpeg_recording_path).replace("$d",ffmpeg_dir).replace("$f",filename + '.' + plugin.get_setting('ffmpeg.ext', str)) for s in post_cmd]
-    log("Command: {}".format(cmd))
     directory = "special://profile/addon_data/plugin.video.iptv.recorder/jobs/"
     xbmcvfs.mkdirs(directory)
     job = str(uuid.uuid1())
@@ -884,7 +882,6 @@ def record_once_thread(programmeid, do_refresh=True, watch=False, remind=False, 
         #minutes = 1
         if minutes < 1:
             if local_endtime > now or past_recording:
-                log("Nagrywamy: {}".format(pyjob))
                 cmd = 'RunScript(%s)' % (pyjob)
                 xbmc.executebuiltin(cmd)
             else:
@@ -1004,7 +1001,6 @@ def sane_name(name):
     if not name:
         return
     # if windows() or (plugin.get_setting('filename.urlencode', str) == 'true'):
-        log("Encoding name: {}".format(name))
         name = quote(name.encode('utf-8'))
         name = name.replace("%20",' ')
         name = name.replace(",", " -")
@@ -1034,7 +1030,6 @@ def sane_name(name):
         # _quote = {'"': '%22', '|': '%7C', '*': '%2A', '/': '%2F', '<': '%3C', ':': '%3A', '\\': '%5C', '?': '%3F', '>': '%3E'}
         # for char in _quote:
             # name = name.replace(char, _quote[char])
-        log("Po zakodowaniu: {}".format(name))
     return name
 
 
