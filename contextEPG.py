@@ -9,23 +9,19 @@ from kodi_six import xbmc, xbmcgui
 
 DATE_FORMAT = "%Y-%m-%d %H:%M:00"
 
-
 def log(x):
     xbmc.log(repr(x), xbmc.LOGERROR)
-
 
 def escape(value):
     value = value.decode("utf8")
     value = value.encode("utf8")
     return urllib.quote_plus(value)
 
-
 def get_format():
     dateFormat = xbmc.getRegion('datelong')
     timeFormat = xbmc.getRegion('time').replace('%H%H', '%H').replace('%I%I', '%I')
     timeFormat = timeFormat.replace(":%S", "")
     return "{}, {}".format(dateFormat, timeFormat)
-
 
 def extract_date(dateLabel, timeLabel):
     date = xbmc.getInfoLabel(dateLabel)
@@ -38,7 +34,6 @@ def extract_date(dateLabel, timeLabel):
     except TypeError:
         parsedDate = datetime(*(time.strptime(fullDate, fullFormat)[0:6]))
     return datetime.strftime(parsedDate, DATE_FORMAT)
-
 
 def get_language():
     try:

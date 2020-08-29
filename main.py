@@ -748,9 +748,6 @@ def record_once_thread(programmeid, do_refresh=True, watch=False, remind=False, 
 
     # Check if we are recoring from archive
     if past_recording:
-
-        log("Start: {}".format(local_starttime))
-        log("End: {}".format(local_endtime))
         cmd.append(url+"?utc={}&lutc={}".format(utc,lutc))
     else:
         cmd.append(url)
