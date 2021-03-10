@@ -2959,9 +2959,9 @@ def xmltv():
                 decompressedFile = gzip.GzipFile(fileobj=compressedFile, mode='rb')
                 data_bytes = decompressedFile.read()
 
-            encoding = find_xml_bytes_encoding(data_bytes)
-            data = data_bytes.decode(encoding)
-            xml_filename_to_file_content[xml] = data
+#             encoding = find_xml_bytes_encoding(data_bytes)
+#             data = data_bytes.decode(encoding)
+            xml_filename_to_file_content[xml] = data_bytes
 
             htmlparser = HTMLParser()
 
