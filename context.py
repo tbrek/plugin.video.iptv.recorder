@@ -10,7 +10,7 @@ def log(x):
 
 
 channel = xbmc.getInfoLabel('ListItem.Label')
-channel = urllib.quote_plus(channel)
+channel = urllib.quote(channel)
 
 try:
 
