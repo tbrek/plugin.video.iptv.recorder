@@ -2801,7 +2801,7 @@ def xmltv():
             settings_shift = float(plugin.get_setting('external.m3u.shift.'+x))
             global_shift = settings_shift
 
-            header = re.search('#EXTM3U(.*)', data)
+            header = re.search('#EXTM3U(.*)', data.decode('UTF-8'))
             if header:
                 tvg_shift = re.search('tvg-shift="(.*?)"', header.group(1))
                 if tvg_shift:
@@ -2809,7 +2809,7 @@ def xmltv():
                     if tvg_shift:
                         global_shift = float(tvg_shift) + settings_shift
 
-            channels = re.findall('#EXTINF:(.*?)(?:\r\n|\r|\n)(.*?)(?:\r\n|\r|\n|$)', data, flags=(re.I | re.DOTALL))
+            channels = re.findall('#EXTINF:(.*?)(?:\r\n|\r|\n)(.*?)(?:\r\n|\r|\n|$)', data.decode('UTF-8'), flags=(re.I | re.DOTALL))
             total = len(channels)
             i = 0
             for channel in channels:
