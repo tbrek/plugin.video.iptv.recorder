@@ -1,8 +1,7 @@
-from __future__ import unicode_literals
-
 import urllib
-
-from kodi_six import xbmc, xbmcgui
+import urllib.parse
+import xbmc
+import xbmcgui
 
 
 def log(x):
@@ -10,7 +9,7 @@ def log(x):
 
 
 channel = xbmc.getInfoLabel('ListItem.Label')
-channel = urllib.quote(channel)
+channel = urllib.parse.quote_plus(channel)
 
 try:
 

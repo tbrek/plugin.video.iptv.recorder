@@ -1,27 +1,28 @@
-from __future__ import unicode_literals
-
 import locale
 import time
 from datetime import datetime
 import urllib
-
-from kodi_six import xbmc, xbmcgui
+import urllib.parse
+import xbmc
+import xbmcgui
 
 DATE_FORMAT = "%Y-%m-%d %H:%M:00"
+
 
 def log(x):
     xbmc.log(repr(x), xbmc.LOGERROR)
 
+
 def escape(value):
-    value = value.decode("utf8")
-    value = value.encode("utf8")
-    return urllib.quote_plus(value)
+    return urllib.parse.quote_plus(value)
+
 
 def get_format():
     dateFormat = xbmc.getRegion('datelong')
     timeFormat = xbmc.getRegion('time').replace('%H%H', '%H').replace('%I%I', '%I')
     timeFormat = timeFormat.replace(":%S", "")
     return "{}, {}".format(dateFormat, timeFormat)
+
 
 def extract_date(dateLabel, timeLabel):
     date = xbmc.getInfoLabel(dateLabel)
@@ -34,6 +35,7 @@ def extract_date(dateLabel, timeLabel):
     except TypeError:
         parsedDate = datetime(*(time.strptime(fullDate, fullFormat)[0:6]))
     return datetime.strftime(parsedDate, DATE_FORMAT)
+
 
 def get_language():
     try:
@@ -48,35 +50,12 @@ try:
     usedLocale = locale.setlocale(locale.LC_TIME, get_language())
 except:
     usedLocale = locale.setlocale(locale.LC_TIME, "")
+log("Used locale: " + usedLocale)
 
 fullFormat = get_format()
 
-channel = xbmc.getInfoLabel("ListItem.ChannelName")
-title = xbmc.getInfoLabel("ListItem.Label")
-title = title.replace("%20", ' ')
-title = title.replace(",", " -")
-title = title.replace('/', "%2F")
-title = title.replace('%2C', " -")
-title = title.replace(':', " -")
-title = title.replace("%3A", " -")
-title = title.replace("\u0104", "A")
-title = title.replace("\u0105", "a")
-title = title.replace("\u0106", "C")
-title = title.replace("\u0107", "c")
-title = title.replace("\u0118", "E")
-title = title.replace("\u0119", "e")
-title = title.replace("\u0141", "L")
-title = title.replace("\u0142", "l")
-title = title.replace("\u0143", "N")
-title = title.replace("\u0144", "n")
-title = title.replace("\u00f2", "O")
-title = title.replace("\u00f3", "o")
-title = title.replace("\u015a", "S")
-title = title.replace("\u015b", "s")
-title = title.replace("\u0179", "Z")
-title = title.replace("\u017a", "z")
-title = title.replace("\u017b", "Z")
-title = title.replace("\u017c", "z")
+channel = escape(xbmc.getInfoLabel("ListItem.ChannelName"))
+title = escape(xbmc.getInfoLabel("ListItem.Label"))
 
 try:
     start = extract_date("ListItem.StartDate", "ListItem.StartTime")

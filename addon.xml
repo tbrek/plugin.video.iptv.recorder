@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<addon id="plugin.video.iptv.recorder" version="0.2.1" name="IPTV Recorder with archive support"
-  provider-name="primaeval, Chychy, Dob, tbrek">
+<addon id="plugin.video.iptv.recorder"
+version="0.0.131"
+name="IPTV Recorder"
+provider-name="primaeval, Chychy">
 <requires>
   <import addon="xbmc.python" version="3.0.0" />
   <import addon="script.module.xbmcswift2"/>
@@ -37,27 +39,10 @@ Complex stream handling might need an extra script instead of ffmpeg.
 ffmpeg simply copies the stream into a transport stream container.
 </description>
 <disclaimer lang="en">Make sure recording streams is legal in your country.</disclaimer>
-<source>https://github.com/Dobi-Dev/plugin.video.iptv.recorder</source>
+<source>https://github.com/primaeval/plugin.video.iptv.recorder</source>
 <forum>https://forum.kodi.tv/showthread.php?tid=329991</forum>
 <language>en fr de</language>
-<news>
-version 0.3.0
-- Add archive support for Teleelevidienie
-- Fix Polish character encoding
-
-version 0.2.0
-- Compatibility with Kodi Matrix.
-- Add some missing translations.
-- Improve "Sort Channels by" settings.
-- Add channel icon in the record list.
-- Improve encoding detection of the XML TV file.
-- Fix search input not supporting non ascii character.
-- Fix kodi crash on startup when user have rules to renew jobs.
-- Fix and improve "record and play" feature.
-- Reducing default startup time to 20 seconds.
-- Add error messag when trying to access database not created.
-- Exit the service smoothly and fastly if the user request Kodi to exit before the startup delay.
-</news>
+<news>Now records plugin:// links in Leia</news>
 <assets>
   <icon>icon.png</icon>
   <screenshot>resources/screenshots/screenshot-00.jpg</screenshot>

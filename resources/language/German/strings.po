@@ -361,39 +361,3 @@ msgstr "Kategorien"
 msgctxt "#30089"
 msgid "Remind Weekly"
 msgstr "Wöchentlich erinnern"
-
-msgctxt "#30090"
-msgid "Convert to mp4"
-msgstr "Convert to mp4"
-
-msgctxt "#30091"
-msgid "All Channels"
-msgstr "All Channels"
-
-msgctxt "#30092"
-msgid "Start Time"
-msgstr "Start Time"
-
-msgctxt "#30093"
-msgid "Number of hours to record"
-msgstr "Number of hours to record"
-
-msgctxt "#30094"
-msgid "Rule Name"
-msgstr "Rule Name"
-
-msgctxt "#30095"
-msgid "Start Date"
-msgstr "Start Date"
-
-msgctxt "#30096"
-msgid "Stop Time"
-msgstr "Stop Time"
-
-msgctxt "#30097"
-msgid "Updating database"
-msgstr "Updating database"
-
-msgctxt "#30098"
-msgid "Database not found"
-msgstr "Database not found, please retry after few seconds ..."

@@ -1,36 +1,23 @@
 #! /usr/bin/python
-from __future__ import unicode_literals
 
 __strings = {}
 
 if __name__ == "__main__":
     import polib
-    import traceback
     po = polib.pofile('resources/language/English/strings.po')
 
     try:
-        import os
         import re
         import subprocess
-
-        strings = []
-        regex_to_found = re.compile("get_string\([\"'](.*?)[\"']\)", re.IGNORECASE)
-        for root, dirs, files in os.walk("."):
-            for file in files:
-                if file.endswith(".py"):
-                    with open(os.path.join(root, file), "r", encoding="utf-8") as file_content:
-                        for line in file_content:
-                            strings_found = regex_to_found.findall(line)
-                            if strings_found:
-                                strings.extend(strings_found)
-
+        r = subprocess.check_output(["grep", "-hnr", "_([\'\"]", "."])
+        strings = re.compile("_\([\"'](.*?)[\"']\)", re.IGNORECASE).findall(r)
         translated = [m.msgid.lower().replace("'", "\\'") for m in po]
         missing = set([s for s in strings if s.lower() not in translated])
         if missing:
             ids_range = range(30000, 31000)
             ids_reserved = [int(m.msgctxt[1:]) for m in po]
             ids_available = [x for x in ids_range if x not in ids_reserved]
-            print("New text to translate found : %s" % missing)
+            print("warning: missing translation for"), missing
             for text in missing:
                 id = ids_available.pop(0)
                 entry = polib.POEntry(
@@ -41,7 +28,6 @@ if __name__ == "__main__":
                 po.append(entry)
             po.save('resources/language/English/strings.po')
     except:
-        traceback.print_exc()
         pass
 
     content = []
@@ -55,7 +41,7 @@ if __name__ == "__main__":
             line = "__strings['{0}'] = {1}\n".format(m.msgid.lower().replace("'", "\\'"), m.msgctxt.replace('#', '').strip())
             f.write(line)
 else:
-    from kodi_six import xbmc, xbmcaddon
+    import xbmc, xbmcaddon
     __language__ = xbmcaddon.Addon().getLocalizedString
 
     def get_string(t):
@@ -157,12 +143,3 @@ __strings['browse'] = 30086
 __strings['add one time rule'] = 30087
 __strings['categories'] = 30088
 __strings['remind weekly'] = 30089
-__strings['convert to mp4'] = 30090
-__strings['all channels'] = 30091
-__strings['start time'] = 30092
-__strings['number of hours to record'] = 30093
-__strings['rule name'] = 30094
-__strings['start date'] = 30095
-__strings['stop time'] = 30096
-__strings['updating database'] = 30097
-__strings['database not found'] = 30098
