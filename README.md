@@ -1,3 +1,5 @@
+# This plugin in no longer maintained.
+
 # IPTV Recorder
 ## plugin.video.iptv.recorder
 
